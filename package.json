@@ -9,6 +9,7 @@
     "db-pull": "npx prisma db pull && npx prisma generate"
   },
   "dependencies": {
+    "@prisma/client": "^4.8.0",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "dotenv": "^16.0.3",
