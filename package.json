@@ -5,11 +5,13 @@
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js",
+    "studio": "npx prisma studio",
     "db-push": "npx prisma db push && npx prisma generate",
     "db-pull": "npx prisma db pull && npx prisma generate"
   },
   "dependencies": {
     "@prisma/client": "^4.8.0",
+    "argon2": "^0.30.2",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "dotenv": "^16.0.3",
