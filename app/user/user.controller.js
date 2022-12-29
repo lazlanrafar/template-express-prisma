@@ -1,6 +1,7 @@
 const { Encrypt } = require("../../utils/hash-password");
 const { InternalServerError, Ok } = require("../../utils/http-response");
-const { StoreUser } = require("./user.repository");
+const { EncryptToken } = require("../../utils/jwt");
+const { StoreUser, FetchUserByEmail } = require("./user.repository");
 
 module.exports = {
   Register: async (req, res) => {
@@ -16,8 +17,26 @@ module.exports = {
 
       return Ok(res, result, "User registered successfully");
     } catch (error) {
-      console.log(error);
       return InternalServerError(res, error, "Failed to register user");
+    }
+  },
+  Login: async (req, res) => {
+    try {
+      const body = req.body;
+      const user = await FetchUserByEmail(body.email);
+
+      const token = EncryptToken({
+        ...user,
+      });
+
+      const payload = {
+        ...user,
+        token,
+      };
+
+      return Ok(res, payload, "User logged in successfully");
+    } catch (error) {
+      return InternalServerError(res, error, "Failed to login user");
     }
   },
 };
