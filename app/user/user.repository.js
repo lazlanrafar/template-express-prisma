@@ -3,16 +3,23 @@ const prisma = new PrismaClient();
 
 module.exports = {
   FetchUser: async () => {
-    return await prisma.user.findMany();
+    return await prisma.tbm_user.findMany();
   },
   FetchUserById: async (id) => {
-    return await prisma.user.findUnique({
+    return await prisma.tbm_user.findUnique({
       where: {
         id: id,
       },
     });
   },
-  CreateUser: async (payload) => {
+  FetchUserByEmail: async (email) => {
+    return await prisma.tbm_user.findUnique({
+      where: {
+        email: email,
+      },
+    });
+  },
+  StoreUser: async (payload) => {
     return await prisma.tbm_user.create({
       data: payload,
     });

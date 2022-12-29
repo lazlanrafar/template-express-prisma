@@ -1,6 +1,6 @@
 const { Encrypt } = require("../../utils/hash-password");
 const { InternalServerError, Ok } = require("../../utils/http-response");
-const { CreateUser } = require("./user.repository");
+const { StoreUser } = require("./user.repository");
 
 module.exports = {
   Register: async (req, res) => {
@@ -12,7 +12,7 @@ module.exports = {
         password: await Encrypt(body.password),
       };
 
-      const result = await CreateUser(payload);
+      const result = await StoreUser(payload);
 
       return Ok(res, result, "User registered successfully");
     } catch (error) {
