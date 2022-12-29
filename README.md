@@ -24,12 +24,33 @@ This Project would provide a set of tools and features that make it easy to buil
 
 ### Format Name
 
-| Controller | Repository | Description         |
-| ---------- | ---------- | ------------------- |
-| Get        | Fetch      | To fetching data    |
-| Create     | Store      | To create something |
-| Edit       | Update     | To update something |
-| Delete     | Destroy    | To delete something |
+<table width="100%">
+    <tr>
+        <th>Controller</th>
+        <th>Repository</th>
+        <th>Description</th>
+    </tr>
+    <tr>
+        <td>Get</td>
+        <td>Fetch</td>
+        <td>To fetching data</td>
+    </tr>
+    <tr>
+        <td>Create</td>
+        <td>Store</td>
+        <td>To create something</td>
+    </tr>
+    <tr>
+        <td>Edit</td>
+        <td>Update</td>
+        <td>To update something</td>
+    </tr>
+    <tr>
+        <td>Delete</td>
+        <td>Destroy</td>
+        <td>To delete something</td>
+    </tr>
+</table>
 
 ### Stack
 
