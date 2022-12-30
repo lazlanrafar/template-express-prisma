@@ -34,4 +34,16 @@ module.exports = {
       return InternalServerError(res, error, "Failed to login user");
     }
   },
+  SendEmailMiddleware: async (req, res, next) => {
+    try {
+      const { email } = req.body;
+
+      const user = await FetchUserByEmail(email);
+      if (!user) return BadRequest(res, "Email not registered");
+
+      next();
+    } catch (error) {
+      return InternalServerError(res, error, "Failed to send email");
+    }
+  },
 };

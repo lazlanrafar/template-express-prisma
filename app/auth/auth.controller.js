@@ -42,6 +42,11 @@ module.exports = {
   },
   SendEmail: async (req, res) => {
     try {
+      const user = await FetchUserByEmail(req.body.email);
+      const token = EncryptToken({
+        ...user,
+      });
+
       const transporter = nodemailer.createTransport({
         host: process.env.EMAIL_HOST,
         service: process.env.EMAIL_SERVICE,
@@ -56,8 +61,8 @@ module.exports = {
       await transporter.sendMail({
         from: process.env.EMAIL_USER,
         to: req.body.email,
-        subject: "Test Email",
-        text: "Hello World",
+        subject: "Forgot Password",
+        text: `${process.env.BASE_URL}/reset-password/${token}`,
       });
 
       return Ok(res, "Email sent successfully");
