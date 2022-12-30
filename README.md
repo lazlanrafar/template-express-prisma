@@ -33,22 +33,22 @@ This Project would provide a set of tools and features that make it easy to buil
     <tr>
         <td>Get</td>
         <td>Fetch</td>
-        <td>To fetching data</td>
+        <td>refers to the process of retrieving data from the database.</td>
     </tr>
     <tr>
         <td>Create</td>
         <td>Store</td>
-        <td>To create something</td>
+        <td>refers to the process of inserting new data into the database.</td>
     </tr>
     <tr>
         <td>Edit</td>
         <td>Update</td>
-        <td>To update something</td>
+        <td>refers to the process of modifying existing data in the database.</td>
     </tr>
     <tr>
         <td>Delete</td>
         <td>Destroy</td>
-        <td>To delete something</td>
+        <td>refers to the process of removing data from the database.</td>
     </tr>
 </table>
 
