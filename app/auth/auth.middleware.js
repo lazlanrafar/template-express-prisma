@@ -2,8 +2,10 @@ const { Compare } = require("../../utils/hash-password");
 const {
   BadRequest,
   InternalServerError,
+  Unauthorized,
 } = require("../../utils/http-response");
-const { FetchUserByEmail } = require("../user/user.repository");
+const { DecryptToken } = require("../../utils/jwt");
+const { FetchUserByEmail, FetchUserById } = require("../user/user.repository");
 
 module.exports = {
   RegisterMiddleware: async (req, res, next) => {
@@ -44,6 +46,26 @@ module.exports = {
       next();
     } catch (error) {
       return InternalServerError(res, error, "Failed to send email");
+    }
+  },
+  ForgotPasswordMiddleware: async (req, res, next) => {
+    try {
+      const body = req.body;
+      if (body.password !== body.confirmPassword)
+        return BadRequest(res, "Password not match");
+
+      const token = req.params.token;
+      if (!token) return BadRequest(res, "Token not found");
+
+      const deCode = DecryptToken(token);
+      const user = await FetchUserById(deCode.id);
+
+      if (!user) return BadRequest(res, "Email not registered");
+
+      req.user = user;
+      next();
+    } catch (error) {
+      return InternalServerError(res, error, "Failed to change password");
     }
   },
 };

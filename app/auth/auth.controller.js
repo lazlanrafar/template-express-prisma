@@ -1,7 +1,11 @@
 const { Encrypt } = require("../../utils/hash-password");
 const { Ok, InternalServerError } = require("../../utils/http-response");
 const { EncryptToken } = require("../../utils/jwt");
-const { StoreUser, FetchUserByEmail } = require("../user/user.repository");
+const {
+  StoreUser,
+  FetchUserByEmail,
+  UpdateUser,
+} = require("../user/user.repository");
 const nodemailer = require("nodemailer");
 
 module.exports = {
@@ -69,6 +73,22 @@ module.exports = {
     } catch (error) {
       console.log(error);
       InternalServerError(res, error, "Failed to send email");
+    }
+  },
+  ForgotPassword: async (req, res) => {
+    try {
+      const body = req.body;
+      const user = req.user;
+
+      const payload = {
+        password: await Encrypt(body.password),
+      };
+
+      const result = await UpdateUser(user.id, payload);
+
+      return Ok(res, result, "Password updated successfully");
+    } catch (error) {
+      return InternalServerError(res, error, "Failed to register user");
     }
   },
 };

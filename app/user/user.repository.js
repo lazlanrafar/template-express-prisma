@@ -24,4 +24,12 @@ module.exports = {
       data: payload,
     });
   },
+  UpdateUser: async (id, payload) => {
+    return await prisma.tbm_user.update({
+      where: {
+        id: id,
+      },
+      data: payload,
+    });
+  },
 };
